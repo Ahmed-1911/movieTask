@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 final Dio dio = Dio();
 
-Future<bool> saveVideo(String url, String fileName) async {
+Future<bool> saveImage(String url, String fileName) async {
   Directory directory;
   try {
     if (Platform.isAndroid) {

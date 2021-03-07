@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_task/components/widgets/commen-widgets.dart';
-import 'package:movie_task/models/image.dart';
 import 'package:movie_task/models/person-details.dart';
 import 'package:movie_task/view-models/images-view-model.dart';
 import 'package:movie_task/views/show-image.dart';
@@ -111,7 +111,7 @@ Widget buildImages(BuildContext context,int personId) {
   return Consumer<ImagesProvider>(
     builder: (context , data , widget){
       data.fetchPersonListImages(personId);
-      var imagesList=data.ImagesList;
+      var imagesList=data.imagesList;
       return imagesList.length==0?
       SizedBox():
       Container(
@@ -124,11 +124,7 @@ Widget buildImages(BuildContext context,int personId) {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Show(imagesList[index].filePath)));
+                  Get.to(Show(imagesList[index].filePath));
               },
               child: Container(
                 margin: EdgeInsets.all(5),

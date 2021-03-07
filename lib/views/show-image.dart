@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_task/components/widgets/commen-widgets.dart';
 import 'package:movie_task/services/save-image.dart';
 import 'package:progressive_image/progressive_image.dart';
+// ignore: must_be_immutable
 class Show extends StatefulWidget {
   Show(this.image);
   var image;
@@ -48,8 +49,8 @@ class _ShowState extends State<Show> {
                 ):
                 FlatButton.icon(
                     onPressed: ()async{
-                      bool downloaded = await saveVideo(
-                          "https://image.tmdb.org/t/p/w500/${widget.image}",
+                      bool downloaded = await saveImage(
+                          "https://image.tmdb.org/t/p/original/${widget.image}",
                           "${widget.image}");
                       if (downloaded) {
                         setState(() {

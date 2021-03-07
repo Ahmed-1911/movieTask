@@ -4,6 +4,7 @@ import 'package:movie_task/components/widgets/person-details-widgets.dart';
 import 'package:movie_task/view-models/person-details-view-model.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class Profile extends StatefulWidget {
   Profile(this.personID);
   var personID;

@@ -3,19 +3,19 @@ class Person {
     this.id,
     this.name,
     this.popularity,
-    this.backdrop_path
+    this.backdropPath
   });
 
   int id;
   String name;
   double popularity;
-  String backdrop_path;
+  String backdropPath;
 
   factory Person.fromJson(Map<String, dynamic> json) =>
       Person(
         id: json["id"],
         name: json["name"],
         popularity: json["popularity"].toDouble(),
-        backdrop_path: json['profile_path']
+        backdropPath: json['profile_path']
       );
 }

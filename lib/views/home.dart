@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:movie_task/components/widgets/commen-widgets.dart';
 import 'package:movie_task/view-models/persons-view-model.dart';
 import 'package:movie_task/views/person-details.dart';
-import 'package:progressive_image/progressive_image.dart';
 import 'package:provider/provider.dart';
 class Home extends StatelessWidget {
   @override
@@ -31,12 +31,7 @@ class Home extends StatelessWidget {
                             child: FadeInAnimation(
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Profile(listItems[index].id)
-                                        )
-                                    );
+                                   Get.to(Profile(listItems[index].id));
                                   },
                                   child: Hero(
                                     tag: '${listItems[index].id}',
@@ -53,7 +48,7 @@ class Home extends StatelessWidget {
                                               spreadRadius: 1)
                                         ],
                                       ),
-                                      child:myImageContainer(context,listItems[index].backdrop_path)
+                                      child:myImageContainer(context,listItems[index].backdropPath)
                                     ),
                                   ),
                                 )),
