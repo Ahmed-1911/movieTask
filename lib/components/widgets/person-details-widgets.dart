@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_task/components/widgets/commen-widgets.dart';
-import 'package:movie_task/models/person-details.dart';
-import 'package:movie_task/view-models/images-view-model.dart';
 import 'package:movie_task/views/show-image.dart';
-import 'package:provider/provider.dart';
 
-Widget buildHeader(String image, int id) {
+Widget buildHeader(var person) {
   return Stack(
     children: <Widget>[
       Ink(
@@ -45,12 +42,12 @@ Widget buildHeader(String image, int id) {
                   ]),
                 ),
                 child: Hero(
-                  tag: '$id',
+                  tag: '${person.id}',
                   child: Center(
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(85),
                         child: Image.network(
-                            'https://image.tmdb.org/t/p/w500/$image',
+                            'https://image.tmdb.org/t/p/w500/${person.profilePath}',
                             width: 120,
                             height: 120,
                             fit: BoxFit.fill)),
@@ -65,14 +62,14 @@ Widget buildHeader(String image, int id) {
   );
 }
 
-Widget buildMainInfo(BuildContext context, double width, String name) {
+Widget buildMainInfo(BuildContext context, double width, var peron) {
   return Container(
     width: width,
     margin: const EdgeInsets.all(10),
     alignment: AlignmentDirectional.center,
     child: Column(
       children: <Widget>[
-        Text(name,
+        Text(peron.name,
             style: TextStyle(
                 fontSize: 20, color: Colors.blue, fontWeight: FontWeight.bold)),
       ],
@@ -80,7 +77,7 @@ Widget buildMainInfo(BuildContext context, double width, String name) {
   );
 }
 
-Widget buildInfo(BuildContext context, PersonDetails person) {
+Widget buildInfo(BuildContext context, var person) {
   return Container(
       padding: EdgeInsets.all(10),
       child: Card(
@@ -107,45 +104,39 @@ Widget buildInfo(BuildContext context, PersonDetails person) {
       ));
 }
 
-Widget buildImages(BuildContext context,int personId) {
-  return Consumer<ImagesProvider>(
-    builder: (context , data , widget){
-      data.fetchPersonListImages(personId);
-      var imagesList=data.imagesList;
-      return imagesList.length==0?
-      SizedBox():
-      Container(
-        height: MediaQuery.of(context).size.height * 0.25,
-        padding: EdgeInsets.only(bottom: 5),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemExtent: 120,
-          itemCount: imagesList.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                  Get.to(Show(imagesList[index].filePath));
-              },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.black,
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(4, 0),
-                        color: Colors.black26,
-                        blurRadius: 1,
-                        spreadRadius: 1)
-                  ],
-                ),
-                child: myImageContainer(context, imagesList[index].filePath),
-              ),
-            );
+Widget buildImages(BuildContext context,var imagesList) {
+  return imagesList.length==0?
+  SizedBox():
+  Container(
+    height: MediaQuery.of(context).size.height * 0.25,
+    padding: EdgeInsets.only(bottom: 5),
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemExtent: 120,
+      itemCount: imagesList.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            Get.to(Show(imagesList[index].filePath));
           },
-        ),
-      );
-    },
+          child: Container(
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.black,
+              boxShadow: [
+                BoxShadow(
+                    offset: Offset(4, 0),
+                    color: Colors.black26,
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ],
+            ),
+            child: myImageContainer(context, imagesList[index].filePath),
+          ),
+        );
+      },
+    ),
   );
 }
 
