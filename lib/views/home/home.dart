@@ -18,37 +18,7 @@ class Home extends StatelessWidget {
               children: List.generate(
                 personsController.personsList.length,
                     (int index) {
-                  return AnimationConfiguration.staggeredGrid(
-                    position: index,
-                    duration: const Duration(milliseconds: 1500),
-                    columnCount: 2,
-                    child: ScaleAnimation(
-                      child: FadeInAnimation(
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(Profile(personsController.personsList[index].id));
-                            },
-                            child: Hero(
-                              tag: '${personsController.personsList[index].id}',
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.black,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: Offset(4, 0),
-                                          color: Colors.black26,
-                                          blurRadius: 1,
-                                          spreadRadius: 1)
-                                    ],
-                                  ),
-                                  child:myImageContainer(context,personsController.personsList[index].backdropPath)
-                              ),
-                            ),
-                          )),
-                    ),
-                  );
+                  return personImageContainer(context,index,personsController.personsList[index]);
                 },
               ),
             ),
